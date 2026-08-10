@@ -32,8 +32,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Deck Craft RVA | Richmond Deck Builders" },
       {
         property: "og:description",
-        content:
-          "Custom deck building and restoration in Greater Richmond, Virginia. Free on-site estimates.",
+        content: "Custom deck building and restoration in Greater Richmond, Virginia. Free on-site estimates.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -45,8 +44,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "HomeAndConstructionBusiness",
           name: "Deck Craft RVA",
-          description:
-            "Deck building and restoration contractor serving Richmond, Virginia.",
+          description: "Deck building and restoration contractor serving Richmond, Virginia.",
           telephone: "+1-804-555-0142",
           areaServed: "Richmond, VA",
           aggregateRating: {
@@ -144,7 +142,16 @@ const areaGroups = [
   {
     county: "City of Richmond",
     blurb: "From the Fan to the Northside — decks on every kind of city lot.",
-    places: ["The Fan", "Museum District", "Carytown", "Church Hill", "Manchester", "Forest Hill", "Northside", "Westover Hills"],
+    places: [
+      "The Fan",
+      "Museum District",
+      "Carytown",
+      "Church Hill",
+      "Manchester",
+      "Forest Hill",
+      "Northside",
+      "Westover Hills",
+    ],
   },
   {
     county: "Henrico County",
@@ -208,18 +215,27 @@ function Index() {
             <span className="border border-gold/60 px-3 py-1.5 font-display text-base tracking-[0.15em] text-gold">
               DC
             </span>
-            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">
-              DECK CRAFT
-            </span>
+            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">DECK CRAFT</span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-foreground/80 lg:flex">
-            <a href="#services" className="transition-colors hover:text-gold">Services</a>
-            <a href="#work" className="transition-colors hover:text-gold">Our Work</a>
-            <a href="#area" className="transition-colors hover:text-gold">Service Area</a>
-            <a href="#faq" className="transition-colors hover:text-gold">FAQ</a>
+            <a href="#services" className="transition-colors hover:text-gold">
+              Services
+            </a>
+            <a href="#work" className="transition-colors hover:text-gold">
+              Our Work
+            </a>
+            <a href="#area" className="transition-colors hover:text-gold">
+              Service Area
+            </a>
+            <a href="#faq" className="transition-colors hover:text-gold">
+              FAQ
+            </a>
           </nav>
           <div className="flex items-center gap-4">
-            <a href={PHONE_HREF} className="hidden items-center gap-2 text-sm text-foreground/85 hover:text-gold md:flex">
+            <a
+              href={PHONE_HREF}
+              className="hidden items-center gap-2 text-sm text-foreground/85 hover:text-gold md:flex"
+            >
               <Phone className="h-4 w-4 text-gold" /> {PHONE}
             </a>
             <a
@@ -246,11 +262,11 @@ function Index() {
           </p>
           <h1 className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
             Your deck, rebuilt right.
-            <span className="mt-2 block text-gold">We come to you.</span>
+            <span className="mt-2 block text-gold">PROTECT YOUR INVESTMENT.</span>
           </h1>
           <p className="mt-6 max-w-xl text-foreground/80">
-            Custom builds, full restorations, staining and structural repairs
-            across the Richmond metro — from one crew, start to finish.
+            Custom builds, full restorations, staining and structural repairs across the Richmond metro — from one crew,
+            start to finish.
           </p>
           <a
             href="#quote"
@@ -307,19 +323,15 @@ function Index() {
         />
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
-          <h2 className="mt-4 font-display text-3xl tracking-wide">
-            One crew, from demo to final walkthrough.
-          </h2>
+          <h2 className="mt-4 font-display text-3xl tracking-wide">One crew, from demo to final walkthrough.</h2>
           <p className="mt-5 leading-relaxed text-foreground/75">
-            We've been building and restoring decks in the Richmond area since
-            2011 — no subcontractor handoffs, no rotating faces in your backyard.
+            We've been building and restoring decks in the Richmond area since 2011 — no subcontractor handoffs, no
+            rotating faces in your backyard.
           </p>
           <p className="mt-4 leading-relaxed text-foreground/70">
-            Full custom build, rebuild after twenty Virginia summers, or a
-            sand-and-stain that makes a tired deck look new again: same
-            treatment every time. Pressure-treated framing, properly set
-            fasteners, and a finish applied in the right weather window so it
-            actually cures.
+            Full custom build, rebuild after twenty Virginia summers, or a sand-and-stain that makes a tired deck look
+            new again: same treatment every time. Pressure-treated framing, properly set fasteners, and a finish applied
+            in the right weather window so it actually cures.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
             {[
@@ -345,16 +357,8 @@ function Index() {
           </h2>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {services.map((s) => (
-              <article
-                key={s.title}
-                className="overflow-hidden rounded-2xl border border-border bg-card soft-card"
-              >
-                <img
-                  src={s.img}
-                  alt={s.alt}
-                  loading="lazy"
-                  className="h-56 w-full object-cover"
-                />
+              <article key={s.title} className="overflow-hidden rounded-2xl border border-border bg-card soft-card">
+                <img src={s.img} alt={s.alt} loading="lazy" className="h-56 w-full object-cover" />
                 <div className="p-6 sm:p-8">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
@@ -390,9 +394,7 @@ function Index() {
       {/* Work */}
       <section id="work" className="mx-auto max-w-7xl px-5 py-20 lg:py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Our Work</p>
-        <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
-          Recent decks around Richmond.
-        </h2>
+        <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">Recent decks around Richmond.</h2>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {gallery.map((g, i) => (
             <img
@@ -414,9 +416,8 @@ function Index() {
             Deck building and restoration across the Richmond metro.
           </h2>
           <p className="mt-5 max-w-2xl text-foreground/70">
-            We work within about 40 minutes of downtown — the City of Richmond
-            plus Henrico, Chesterfield and Hanover counties. No travel fees
-            inside the zone.
+            We work within about 40 minutes of downtown — the City of Richmond plus Henrico, Chesterfield and Hanover
+            counties. No travel fees inside the zone.
           </p>
           <div className="mt-10 overflow-hidden rounded-3xl border border-border">
             <iframe
@@ -451,9 +452,7 @@ function Index() {
 
       {/* FAQ */}
       <section id="faq" className="mx-auto max-w-3xl px-5 py-20 lg:py-24">
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-          Questions
-        </p>
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-gold">Questions</p>
         <h2 className="mt-4 text-center font-display text-3xl tracking-wide sm:text-4xl">
           Everything you wanted to ask.
         </h2>
@@ -467,13 +466,9 @@ function Index() {
                 className="flex w-full items-center justify-between gap-4 py-5 text-left"
               >
                 <span className="font-medium">{f.q}</span>
-                <Plus
-                  className={`h-5 w-5 shrink-0 text-gold transition-transform ${open === i ? "rotate-45" : ""}`}
-                />
+                <Plus className={`h-5 w-5 shrink-0 text-gold transition-transform ${open === i ? "rotate-45" : ""}`} />
               </button>
-              {open === i && (
-                <p className="pb-5 text-sm leading-relaxed text-foreground/70">{f.a}</p>
-              )}
+              {open === i && <p className="pb-5 text-sm leading-relaxed text-foreground/70">{f.a}</p>}
             </div>
           ))}
         </div>
@@ -483,15 +478,12 @@ function Index() {
       <section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-              Free Estimate
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Free Estimate</p>
             <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
               Tell us what you've got. We'll come look at it.
             </h2>
             <p className="mt-5 text-foreground/70">
-              Most estimates are scheduled within 48 hours. No deposit to book
-              the visit, no obligation after it.
+              Most estimates are scheduled within 48 hours. No deposit to book the visit, no obligation after it.
             </p>
             <div className="mt-8 space-y-4 text-foreground/80">
               <a href={PHONE_HREF} className="flex items-center gap-3 hover:text-gold">
@@ -521,8 +513,7 @@ function Index() {
                 <Check className="mx-auto h-10 w-10 text-gold" />
                 <h3 className="mt-4 font-display text-xl">Request received</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  We'll call you back within one business day to schedule the
-                  walkthrough.
+                  We'll call you back within one business day to schedule the walkthrough.
                 </p>
               </div>
             ) : (
@@ -569,9 +560,7 @@ function Index() {
                 >
                   Request my estimate
                 </button>
-                <p className="text-xs text-muted-foreground">
-                  No obligation. We never share your information.
-                </p>
+                <p className="text-xs text-muted-foreground">No obligation. We never share your information.</p>
               </div>
             )}
           </form>
