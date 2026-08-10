@@ -208,7 +208,7 @@ function Index() {
             <span className="border border-gold/60 px-3 py-1.5 font-display text-base tracking-[0.15em] text-gold">
               DC
             </span>
-            <span className="hidden font-display text-sm tracking-[0.3em] text-foreground sm:block">
+            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">
               DECK CRAFT
             </span>
           </a>
@@ -239,9 +239,9 @@ function Index() {
           alt="Freshly restored charcoal deck with wide steps and black lattice privacy screens at a Richmond home"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-ink/72" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/75 to-ink/90" />
         <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pb-32 pt-28 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-gold">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">
             Deck Building &amp; Restoration · Richmond, VA
           </p>
           <h1 className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
@@ -303,10 +303,10 @@ function Index() {
           src={deck4.url}
           alt="Deck Craft crew's finished deck surface leading into a landscaped Richmond backyard"
           loading="lazy"
-          className="h-[24rem] w-full rounded-lg object-cover"
+          className="h-[24rem] w-full rounded-2xl object-cover"
         />
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">About Us</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
           <h2 className="mt-4 font-display text-3xl tracking-wide">
             One crew, from demo to final walkthrough.
           </h2>
@@ -339,7 +339,7 @@ function Index() {
       {/* Services */}
       <section id="services" className="bg-ink py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Services</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Services</p>
           <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-wide sm:text-4xl">
             Everything your deck could need, priced up front.
           </h2>
@@ -347,7 +347,7 @@ function Index() {
             {services.map((s) => (
               <article
                 key={s.title}
-                className="overflow-hidden rounded-lg border border-border bg-card"
+                className="overflow-hidden rounded-2xl border border-border bg-card soft-card"
               >
                 <img
                   src={s.img}
@@ -389,7 +389,7 @@ function Index() {
 
       {/* Work */}
       <section id="work" className="mx-auto max-w-7xl px-5 py-20 lg:py-24">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Our Work</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Our Work</p>
         <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
           Recent decks around Richmond.
         </h2>
@@ -400,7 +400,7 @@ function Index() {
               src={g.src}
               alt={g.alt}
               loading="lazy"
-              className="h-64 w-full rounded-lg object-cover transition-transform duration-500 hover:scale-[1.02]"
+              className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-[1.02]"
             />
           ))}
         </div>
@@ -409,7 +409,7 @@ function Index() {
       {/* Service area */}
       <section id="area" className="bg-ink py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Service Area</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Service Area</p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl tracking-wide sm:text-4xl">
             Deck building and restoration across the Richmond metro.
           </h2>
@@ -418,7 +418,7 @@ function Index() {
             plus Henrico, Chesterfield and Hanover counties. No travel fees
             inside the zone.
           </p>
-          <div className="mt-10 overflow-hidden rounded-lg border border-border">
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border">
             <iframe
               title="Map of the Deck Craft service area across the Richmond, Virginia metro"
               src="https://www.openstreetmap.org/export/embed.html?bbox=-78.05%2C37.30%2C-77.10%2C37.80&layer=mapnik"
@@ -451,7 +451,7 @@ function Index() {
 
       {/* FAQ */}
       <section id="faq" className="mx-auto max-w-3xl px-5 py-20 lg:py-24">
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-gold">
           Questions
         </p>
         <h2 className="mt-4 text-center font-display text-3xl tracking-wide sm:text-4xl">
@@ -483,7 +483,7 @@ function Index() {
       <section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
               Free Estimate
             </p>
             <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
@@ -510,7 +510,7 @@ function Index() {
           </div>
 
           <form
-            className="rounded-lg border border-border bg-card p-6 sm:p-8"
+            className="rounded-3xl border border-border bg-card soft-card p-6 sm:p-8"
             onSubmit={(e) => {
               e.preventDefault();
               setSent(true);
@@ -540,7 +540,7 @@ function Index() {
                   <select
                     id="project"
                     name="project"
-                    className="h-11 rounded-md border border-input bg-background px-3 text-sm outline-none focus:border-gold"
+                    className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
                   >
                     <option>New deck build</option>
                     <option>Deck restoration / staining</option>
@@ -560,7 +560,7 @@ function Index() {
                     rows={4}
                     maxLength={1000}
                     placeholder="Approx. size, age of the deck, what's bothering you about it…"
-                    className="rounded-md border border-input bg-background p-3 text-sm outline-none focus:border-gold"
+                    className="rounded-xl border border-input bg-background p-3 text-sm outline-none focus:border-gold"
                   />
                 </div>
                 <button
@@ -611,7 +611,7 @@ function Field({
         type={type}
         required={required}
         maxLength={200}
-        className="h-11 rounded-md border border-input bg-background px-3 text-sm outline-none focus:border-gold"
+        className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
       />
     </div>
   );
