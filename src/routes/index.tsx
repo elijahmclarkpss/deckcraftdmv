@@ -303,7 +303,7 @@ function Index() {
           src={deck4.url}
           alt="Deck Craft crew's finished deck surface leading into a landscaped Richmond backyard"
           loading="lazy"
-          className="h-[24rem] w-full rounded-2xl object-cover"
+          className="h-[26rem] w-full rounded-3xl object-cover"
         />
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
@@ -400,7 +400,7 @@ function Index() {
               src={g.src}
               alt={g.alt}
               loading="lazy"
-              className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-[1.02]"
+              className="h-72 w-full rounded-3xl object-cover transition-transform duration-500 hover:scale-[1.02]"
             />
           ))}
         </div>
@@ -418,7 +418,7 @@ function Index() {
             plus Henrico, Chesterfield and Hanover counties. No travel fees
             inside the zone.
           </p>
-          <div className="mt-10 overflow-hidden rounded-2xl border border-border">
+          <div className="mt-10 overflow-hidden rounded-3xl border border-border">
             <iframe
               title="Map of the Deck Craft service area across the Richmond, Virginia metro"
               src="https://www.openstreetmap.org/export/embed.html?bbox=-78.05%2C37.30%2C-77.10%2C37.80&layer=mapnik"
