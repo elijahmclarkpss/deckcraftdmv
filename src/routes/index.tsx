@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
           "@type": "HomeAndConstructionBusiness",
           name: "Deck Craft RVA",
           description: "Deck building and restoration contractor serving Richmond, Virginia.",
-          telephone: "+1-804-555-0142",
+          telephone: "+1-804-399-9722",
           areaServed: "Richmond, VA",
           aggregateRating: {
             "@type": "AggregateRating",
@@ -65,8 +65,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PHONE = "(804) 555-0142";
-const PHONE_HREF = "tel:+18045550142";
+const PHONE = "(804) 399-9722";
+const PHONE_HREF = "tel:+18043999722";
 
 const tickerReviews = [
   { q: "Our 20-year-old deck was gray and splintering — now it looks brand new.", n: "Karen M." },
