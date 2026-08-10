@@ -1,6 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Star, Phone, Mail, MapPin, Clock } from "lucide-react";
+import {
+  Check,
+  Star,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  ArrowRight,
+  Plus,
+  Hammer,
+  Paintbrush,
+  Wrench,
+  CalendarCheck,
+} from "lucide-react";
 
 import deck1 from "@/assets/deck1.jpg.asset.json";
 import deck2 from "@/assets/deck2.jpg.asset.json";
@@ -22,6 +35,8 @@ export const Route = createFileRoute("/")({
         content:
           "Custom deck building and restoration in Greater Richmond, Virginia. Free on-site estimates.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     scripts: [
       {
@@ -34,6 +49,11 @@ export const Route = createFileRoute("/")({
             "Deck building and restoration contractor serving Richmond, Virginia.",
           telephone: "+1-804-555-0142",
           areaServed: "Richmond, VA",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            reviewCount: "118",
+          },
           address: {
             "@type": "PostalAddress",
             addressLocality: "Richmond",
@@ -50,68 +70,124 @@ export const Route = createFileRoute("/")({
 const PHONE = "(804) 555-0142";
 const PHONE_HREF = "tel:+18045550142";
 
-const offerings = [
-  {
-    title: "Custom Deck Building",
-    img: deck1.url,
-    alt: "Custom multi-level deck with lattice privacy screens built in Richmond, VA",
-    body: [
-      "A deck is structure first and surface second. We size joists and footings for Virginia's freeze-thaw and summer humidity, flash the ledger properly, and pull the county permit before a single board goes down.",
-      "Ground-level platforms, multi-level layouts, wrap-arounds and curved edges — designed around how you actually use the backyard.",
-    ],
-  },
-  {
-    title: "Deck Restoration & Staining",
-    img: deck3.url,
-    alt: "Weathered deck restored with solid charcoal stain and rebuilt cascading stairs",
-    body: [
-      "Most decks that look finished aren't. A gray, splintering surface usually has ten good years left underneath once the failed boards are swapped and the structure is re-fastened.",
-      "We strip, sand, replace what's rotted, then seal with a solid-color stain that lands even across old and new wood — the difference you see in the charcoal deck above.",
-    ],
-  },
-  {
-    title: "Repairs, Stairs & Railings",
-    img: deck2.url,
-    alt: "Refinished deck stairs and black railing with lattice panels",
-    body: [
-      "Soft boards, bouncing joists, wobbly rails and stair runs that never felt right. We fix the specific failure instead of selling you a teardown.",
-      "Code-compliant railing systems, rebuilt stringers, and lattice or pergola privacy screens matched to the lines of your house.",
-    ],
-  },
-  {
-    title: "Maintenance Plans",
-    img: deck4.url,
-    alt: "Curved deck edge overlooking a shaded Richmond backyard garden",
-    body: [
-      "Once a deck is right, keeping it right is cheap. Our annual wash-and-seal visit clears pollen, mildew and tree debris, then refreshes the top coat before UV gets through it.",
-      "Scheduled each spring, so the finish never gets far enough gone to need another full restoration.",
-    ],
-  },
+const tickerReviews = [
+  { q: "Our 20-year-old deck was gray and splintering — now it looks brand new.", n: "Karen M." },
+  { q: "The only company that crawled under the deck before quoting it.", n: "Dave R." },
+  { q: "Clean crew, on schedule, swept the site every single evening.", n: "Priya S." },
+  { q: "Rebuilt our stairs and railing in two days. Rock solid now.", n: "Tom B." },
+  { q: "The charcoal stain landed perfectly even across old and new boards.", n: "Alicia W." },
+  { q: "Found rot three other bidders missed. Saved us a full rebuild later.", n: "Greg H." },
 ];
 
-const reviews = [
+const services = [
   {
-    q: "Our 20-year-old deck was gray and splintering. They replaced the bad boards, rebuilt the stairs and stained it charcoal — it looks brand new.",
-    n: "Karen M.",
-    l: "Henrico",
+    icon: Hammer,
+    title: "New Deck Construction",
+    price: "from $42 / sq ft",
+    body: "Ground-level platforms, multi-level layouts, wrap-arounds and curved edges — permitted, properly footed, and framed for Virginia freeze-thaw.",
+    img: deck1.url,
+    alt: "Custom multi-level deck with lattice privacy screens built in Richmond, VA",
+    includes: [
+      "Design + permit handling",
+      "Concrete footings below frost line",
+      "Flashed ledger connection",
+      "Composite or pressure-treated decking",
+    ],
   },
   {
-    q: "Quoted three companies. Deck Craft was the only one who crawled under the deck before pricing it. Found a rotted ledger everyone else missed.",
-    n: "Dave R.",
-    l: "Midlothian",
+    icon: Paintbrush,
+    title: "Restoration & Staining",
+    price: "from $6 / sq ft",
+    body: "Strip, sand, replace the boards that are gone, then seal with a solid-color stain that lands even across old and new wood.",
+    img: deck3.url,
+    alt: "Weathered deck restored with solid charcoal stain and rebuilt cascading stairs",
+    includes: [
+      "Deep clean + mildew treatment",
+      "Board replacement as needed",
+      "Full sand and re-fasten",
+      "Two-coat premium stain",
+    ],
   },
   {
-    q: "Clean, on schedule, and the privacy lattice they added is exactly what we sketched on a napkin. Site was swept every single evening.",
-    n: "Priya S.",
-    l: "Glen Allen",
+    icon: Wrench,
+    title: "Repairs, Stairs & Railings",
+    price: "from $650",
+    body: "Soft boards, bouncing joists, wobbly rails, stair runs that never felt right. We fix the failure instead of selling you a teardown.",
+    img: deck2.url,
+    alt: "Refinished deck stairs and black railing with lattice panels",
+    includes: [
+      "Rot + structural inspection",
+      "Code-compliant railing systems",
+      "Rebuilt stair stringers",
+      "Lattice + privacy screens",
+    ],
+  },
+  {
+    icon: CalendarCheck,
+    title: "Annual Maintenance",
+    price: "$389 / year",
+    body: "One spring visit: wash off the pollen and mildew, spot-treat, then refresh the top coat before UV gets through it.",
+    img: deck4.url,
+    alt: "Curved deck edge overlooking a shaded Richmond backyard garden",
+    includes: [
+      "Spring wash + mildew treatment",
+      "Fastener + board check",
+      "Sealant refresh coat",
+      "Priority repair scheduling",
+    ],
   },
 ];
 
 const materials = ["TREX", "TIMBERTECH", "SIMPSON STRONG-TIE", "BEHR PREMIUM", "FIBERON"];
 
-const areas = [
-  "Richmond City", "Henrico", "Chesterfield", "Midlothian", "Glen Allen",
-  "Short Pump", "Mechanicsville", "Bon Air", "Ashland", "Powhatan",
+const areaGroups = [
+  {
+    county: "City of Richmond",
+    blurb: "From the Fan to the Northside — decks on every kind of city lot.",
+    places: ["The Fan", "Museum District", "Carytown", "Church Hill", "Manchester", "Forest Hill", "Northside", "Westover Hills"],
+  },
+  {
+    county: "Henrico County",
+    blurb: "West End to East End, Short Pump to Sandston.",
+    places: ["Short Pump", "Glen Allen", "Innsbrook", "Lakeside", "Tuckahoe", "Varina"],
+  },
+  {
+    county: "Chesterfield County",
+    blurb: "Midlothian to Chester and everything between.",
+    places: ["Midlothian", "Bon Air", "Brandermill", "Woodlake", "Chester", "Powhatan"],
+  },
+  {
+    county: "Hanover County",
+    blurb: "Mechanicsville and Ashland — full Hanover coverage.",
+    places: ["Mechanicsville", "Ashland"],
+  },
+];
+
+const faqs = [
+  {
+    q: "How long does a deck project take?",
+    a: "A restoration and stain is usually 2–4 days. A new build runs 1–2 weeks depending on size, permits and inspection scheduling. We give you a firm window at the estimate.",
+  },
+  {
+    q: "Do you handle permits?",
+    a: "Yes. For new builds and structural rebuilds we pull the county or city permit and meet the inspector on site. That's included in the quote.",
+  },
+  {
+    q: "What if it rains?",
+    a: "Framing continues in light rain. Staining does not — the finish needs a dry window to cure, so we reschedule that step rather than trap moisture under the coat.",
+  },
+  {
+    q: "Can my old deck be saved?",
+    a: "Usually. Most decks that look finished have good structure under a failed surface. We inspect the framing, ledger and footings first and tell you honestly which way is cheaper long-term.",
+  },
+  {
+    q: "Composite or wood?",
+    a: "Composite costs more up front and almost nothing after. Pressure-treated wood is cheaper to install and needs sealing every 2–3 years. We'll price both at the estimate.",
+  },
+  {
+    q: "How do I pay?",
+    a: "A deposit at scheduling, the balance when you've walked the finished deck with us. Check, card or transfer — no payment before the work starts.",
+  },
 ];
 
 const gallery = [deck1, deck3, deck2, deck4, deck3, deck1].map((d, i) => ({
@@ -121,78 +197,100 @@ const gallery = [deck1, deck3, deck2, deck4, deck3, deck1].map((d, i) => ({
 
 function Index() {
   const [sent, setSent] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-border bg-ink/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
-          <a href="#top" className="border border-gold/60 px-4 py-2 text-center leading-none">
-            <span className="block font-display text-xl tracking-[0.15em] text-gold">DC</span>
-            <span className="mt-1 block text-[9px] tracking-[0.35em] text-gold/70">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-ink/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
+          <a href="#top" className="flex items-center gap-3">
+            <span className="border border-gold/60 px-3 py-1.5 font-display text-base tracking-[0.15em] text-gold">
+              DC
+            </span>
+            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">
               DECK CRAFT
             </span>
           </a>
-          <nav className="hidden items-center gap-9 text-sm font-medium uppercase tracking-wider text-foreground/85 lg:flex">
-            <a href="#about" className="transition-colors hover:text-gold">About Us</a>
-            <a href="#offerings" className="transition-colors hover:text-gold">Services</a>
-            <a href="#reviews" className="transition-colors hover:text-gold">Reviews</a>
-            <a href="#work" className="transition-colors hover:text-gold">Gallery</a>
+          <nav className="hidden items-center gap-8 text-sm text-foreground/80 lg:flex">
+            <a href="#services" className="transition-colors hover:text-gold">Services</a>
+            <a href="#work" className="transition-colors hover:text-gold">Our Work</a>
+            <a href="#area" className="transition-colors hover:text-gold">Service Area</a>
+            <a href="#faq" className="transition-colors hover:text-gold">FAQ</a>
           </nav>
-          <a
-            href="#quote"
-            className="bg-gold px-5 py-3 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90 sm:px-7 sm:text-sm"
-          >
-            Get a Free Quote
-          </a>
+          <div className="flex items-center gap-4">
+            <a href={PHONE_HREF} className="hidden items-center gap-2 text-sm text-foreground/85 hover:text-gold md:flex">
+              <Phone className="h-4 w-4 text-gold" /> {PHONE}
+            </a>
+            <a
+              href="#quote"
+              className="rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Free Estimate
+            </a>
+          </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section id="top" className="gold-sheen relative overflow-hidden bg-ink">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-2 lg:py-28">
-          <div>
-            <p className="text-xl text-foreground/90">We Are</p>
-            <h1 className="mt-1 font-display text-5xl leading-none tracking-wide text-gold sm:text-6xl">
-              DECK CRAFT
-            </h1>
-            <p className="mt-6 max-w-xl leading-relaxed text-foreground/85">
-              We specialize in custom deck construction, full deck restoration
-              and staining, rot repair and board replacement, railings, stairs,
-              pergolas and privacy screens across Richmond, Virginia.
-            </p>
-            <p className="mt-4 max-w-xl leading-relaxed text-foreground/70">
-              Your deck is the part of the house you actually live on half the
-              year. At Deck Craft, the details under the surface — footings,
-              ledger flashing, fastener spacing — matter as much as the finish
-              you see. We look forward to building you something that lasts.
-            </p>
-            <a
-              href="#quote"
-              className="mt-9 inline-block bg-gold px-10 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Get a Free Quote
-            </a>
+      <section id="top" className="relative min-h-[92vh] overflow-hidden">
+        <img
+          src={deck1.url}
+          alt="Freshly restored charcoal deck with wide steps and black lattice privacy screens at a Richmond home"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/75 to-ink/90" />
+        <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pb-32 pt-28 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">
+            Deck Building &amp; Restoration · Richmond, VA
+          </p>
+          <h1 className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
+            Your deck, rebuilt right.
+            <span className="mt-2 block text-gold">We come to you.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-foreground/80">
+            Custom builds, full restorations, staining and structural repairs
+            across the Richmond metro — from one crew, start to finish.
+          </p>
+          <a
+            href="#quote"
+            className="mt-9 inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Get a Free Estimate <ArrowRight className="h-4 w-4" />
+          </a>
+          <div className="mt-7 flex items-center gap-2 text-sm text-foreground/80">
+            <span className="flex text-gold">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-current" />
+              ))}
+            </span>
+            118 five-star reviews in Richmond
           </div>
-          <img
-            src={deck1.url}
-            alt="Freshly restored charcoal deck with wide steps and black lattice privacy screens at a Richmond home"
-            className="h-[26rem] w-full object-cover lg:h-[34rem]"
-          />
+        </div>
+
+        {/* Review ticker */}
+        <div className="absolute inset-x-0 bottom-0 border-t border-border bg-ink/85 py-4 backdrop-blur">
+          <div className="flex w-max animate-[marquee_44s_linear_infinite] gap-10 pr-10">
+            {[...tickerReviews, ...tickerReviews].map((r, i) => (
+              <span key={i} className="flex shrink-0 items-center gap-3 text-sm">
+                <span className="text-gold">“</span>
+                <span className="text-foreground/75">{r.q}</span>
+                <span className="text-muted-foreground">{r.n}</span>
+                <span className="text-border">|</span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Materials */}
-      <section className="border-y border-border bg-ink py-10">
+      <section className="border-b border-border bg-ink py-10">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-5 px-5">
-          <h2 className="max-w-[15rem] text-center font-display text-xl text-foreground lg:text-left">
+          <h2 className="max-w-[15rem] text-center font-display text-lg text-foreground lg:text-left">
             The Materials We Use and Trust
           </h2>
           {materials.map((m) => (
-            <span
-              key={m}
-              className="text-sm font-semibold tracking-[0.2em] text-foreground/45"
-            >
+            <span key={m} className="text-sm font-semibold tracking-[0.2em] text-foreground/45">
               {m}
             </span>
           ))}
@@ -205,146 +303,179 @@ function Index() {
           src={deck4.url}
           alt="Deck Craft crew's finished deck surface leading into a landscaped Richmond backyard"
           loading="lazy"
-          className="h-[24rem] w-full object-cover"
+          className="h-[26rem] w-full rounded-3xl object-cover"
         />
         <div>
-          <p className="leading-relaxed text-foreground/85">
-            We've been building and restoring decks in the Richmond area since
-            2011. Every job runs with one crew from demo to final walkthrough —
-            no subcontractor handoffs, no rotating faces in your backyard.
-          </p>
-          <p className="mt-4 leading-relaxed text-foreground/70">
-            Whether it's a full custom build, a rebuild after twenty Virginia
-            summers, or a sand-and-stain that makes a tired deck look new again,
-            the work gets the same treatment: pressure-treated framing, hidden
-            or properly set fasteners, and a finish applied in the right weather
-            window so it actually cures.
-          </p>
-          <p className="mt-4 leading-relaxed text-foreground/70">
-            Licensed, fully insured, and happy to show you the parts of the job
-            that get hidden once the boards go down.
-          </p>
-          <a
-            href="#offerings"
-            className="mt-8 inline-block border border-gold px-8 py-3 text-sm font-bold uppercase tracking-wider text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
-          >
-            Learn more
-          </a>
-        </div>
-      </section>
-
-      {/* Offerings */}
-      <section id="offerings" className="bg-ink py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="text-center font-display text-3xl tracking-[0.12em] text-gold sm:text-4xl">
-            OUR OFFERINGS
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
+          <h2 className="mt-4 font-display text-3xl tracking-wide">
+            One crew, from demo to final walkthrough.
           </h2>
-          <div className="mt-16 space-y-16 lg:space-y-24">
-            {offerings.map((o, i) => (
-              <div key={o.title} className="grid items-center gap-10 lg:grid-cols-2">
-                <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <h3 className="font-display text-2xl text-foreground">{o.title}</h3>
-                  {o.body.map((b) => (
-                    <p key={b} className="mt-4 leading-relaxed text-foreground/70">
-                      {b}
-                    </p>
-                  ))}
-                  <a
-                    href="#quote"
-                    className="mt-6 inline-block text-sm font-bold uppercase tracking-wider text-gold hover:underline"
-                  >
-                    Learn more
-                  </a>
-                </div>
-                <img
-                  src={o.img}
-                  alt={o.alt}
-                  loading="lazy"
-                  className={`h-72 w-full object-cover lg:h-[24rem] ${i % 2 === 1 ? "lg:order-1" : ""}`}
-                />
+          <p className="mt-5 leading-relaxed text-foreground/75">
+            We've been building and restoring decks in the Richmond area since
+            2011 — no subcontractor handoffs, no rotating faces in your backyard.
+          </p>
+          <p className="mt-4 leading-relaxed text-foreground/70">
+            Full custom build, rebuild after twenty Virginia summers, or a
+            sand-and-stain that makes a tired deck look new again: same
+            treatment every time. Pressure-treated framing, properly set
+            fasteners, and a finish applied in the right weather window so it
+            actually cures.
+          </p>
+          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
+            {[
+              ["14", "Years in RVA"],
+              ["600+", "Decks completed"],
+              ["4.9★", "Google rating"],
+            ].map(([n, l]) => (
+              <div key={l}>
+                <p className="font-display text-2xl text-gold">{n}</p>
+                <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{l}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Reviews */}
-      <section id="reviews" className="mx-auto max-w-7xl px-5 py-20 lg:py-24">
-        <h2 className="text-center font-display text-2xl tracking-[0.12em] text-foreground sm:text-3xl">
-          READ SOME OF OUR GOOGLE REVIEWS
-        </h2>
-        <p className="mt-3 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <span className="font-display text-lg text-gold">4.9</span>
-          <span className="flex text-gold">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-4 w-4 fill-current" />
+      {/* Services */}
+      <section id="services" className="bg-ink py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Services</p>
+          <h2 className="mt-4 max-w-2xl font-display text-3xl tracking-wide sm:text-4xl">
+            Everything your deck could need, priced up front.
+          </h2>
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {services.map((s) => (
+              <article
+                key={s.title}
+                className="overflow-hidden rounded-2xl border border-border bg-card soft-card"
+              >
+                <img
+                  src={s.img}
+                  alt={s.alt}
+                  loading="lazy"
+                  className="h-56 w-full object-cover"
+                />
+                <div className="p-6 sm:p-8">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <s.icon className="h-5 w-5 text-gold" />
+                      <h3 className="font-display text-xl">{s.title}</h3>
+                    </div>
+                    <span className="shrink-0 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
+                      {s.price}
+                    </span>
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-foreground/70">{s.body}</p>
+                  <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+                    {s.includes.map((it) => (
+                      <li key={it} className="flex items-start gap-2 text-sm text-foreground/80">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#quote"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:underline"
+                  >
+                    Get this quoted <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </article>
             ))}
-          </span>
-          <span>· 118 reviews</span>
-        </p>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {reviews.map((r) => (
-            <blockquote key={r.n} className="border border-border bg-card p-6">
-              <div className="flex text-gold">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-foreground/85">“{r.q}”</p>
-              <footer className="mt-4 text-xs uppercase tracking-wider text-muted-foreground">
-                {r.n} — {r.l}
-              </footer>
-            </blockquote>
-          ))}
+          </div>
         </div>
       </section>
 
       {/* Work */}
-      <section id="work" className="bg-ink py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="font-display text-3xl tracking-[0.12em] text-foreground sm:text-4xl">
-            Our Work
-          </h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {gallery.map((g, i) => (
-              <img
-                key={i}
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                className="h-64 w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-              />
-            ))}
-          </div>
+      <section id="work" className="mx-auto max-w-7xl px-5 py-20 lg:py-24">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Our Work</p>
+        <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
+          Recent decks around Richmond.
+        </h2>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {gallery.map((g, i) => (
+            <img
+              key={i}
+              src={g.src}
+              alt={g.alt}
+              loading="lazy"
+              className="h-72 w-full rounded-3xl object-cover transition-transform duration-500 hover:scale-[1.02]"
+            />
+          ))}
         </div>
       </section>
 
       {/* Service area */}
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:py-24">
-        <div>
-          <h2 className="font-display text-3xl tracking-[0.12em] text-gold">
-            SERVICE AREA
+      <section id="area" className="bg-ink py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Service Area</p>
+          <h2 className="mt-4 max-w-3xl font-display text-3xl tracking-wide sm:text-4xl">
+            Deck building and restoration across the Richmond metro.
           </h2>
-          <p className="mt-4 text-foreground/70">
-            We work within about 40 minutes of downtown Richmond. Just outside
-            the list? Call anyway — we often make the trip.
+          <p className="mt-5 max-w-2xl text-foreground/70">
+            We work within about 40 minutes of downtown — the City of Richmond
+            plus Henrico, Chesterfield and Hanover counties. No travel fees
+            inside the zone.
           </p>
-          <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3">
-            {areas.map((a) => (
-              <li key={a} className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 shrink-0 text-gold" />
-                {a}
-              </li>
+          <div className="mt-10 overflow-hidden rounded-3xl border border-border">
+            <iframe
+              title="Map of the Deck Craft service area across the Richmond, Virginia metro"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-78.05%2C37.30%2C-77.10%2C37.80&layer=mapnik"
+              className="h-[22rem] w-full"
+              loading="lazy"
+            />
+          </div>
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {areaGroups.map((g) => (
+              <div key={g.county}>
+                <h3 className="font-display text-lg text-gold">{g.county}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{g.blurb}</p>
+                <ul className="mt-4 space-y-1.5 text-sm text-foreground/80">
+                  {g.places.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
+          <p className="mt-10 text-sm text-muted-foreground">
+            Don't see your area? We travel outside this zone for larger builds —{" "}
+            <a href={PHONE_HREF} className="text-gold hover:underline">
+              call us
+            </a>{" "}
+            with your address.
+          </p>
         </div>
-        <div className="min-h-[20rem] border border-border">
-          <iframe
-            title="Map of the Deck Craft service area around Richmond, Virginia"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-78.05%2C37.30%2C-77.10%2C37.80&layer=mapnik"
-            className="h-full min-h-[20rem] w-full"
-            loading="lazy"
-          />
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="mx-auto max-w-3xl px-5 py-20 lg:py-24">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+          Questions
+        </p>
+        <h2 className="mt-4 text-center font-display text-3xl tracking-wide sm:text-4xl">
+          Everything you wanted to ask.
+        </h2>
+        <div className="mt-10 divide-y divide-border border-y border-border">
+          {faqs.map((f, i) => (
+            <div key={f.q}>
+              <button
+                type="button"
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+              >
+                <span className="font-medium">{f.q}</span>
+                <Plus
+                  className={`h-5 w-5 shrink-0 text-gold transition-transform ${open === i ? "rotate-45" : ""}`}
+                />
+              </button>
+              {open === i && (
+                <p className="pb-5 text-sm leading-relaxed text-foreground/70">{f.a}</p>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -352,12 +483,15 @@ function Index() {
       <section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <h2 className="font-display text-3xl tracking-[0.12em] text-gold sm:text-4xl">
-              GET A FREE QUOTE
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Free Estimate
+            </p>
+            <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
+              Tell us what you've got. We'll come look at it.
             </h2>
-            <p className="mt-4 text-foreground/70">
-              Tell us what you've got and we'll come look at it. Most estimates
-              are scheduled within 48 hours.
+            <p className="mt-5 text-foreground/70">
+              Most estimates are scheduled within 48 hours. No deposit to book
+              the visit, no obligation after it.
             </p>
             <div className="mt-8 space-y-4 text-foreground/80">
               <a href={PHONE_HREF} className="flex items-center gap-3 hover:text-gold">
@@ -376,7 +510,7 @@ function Index() {
           </div>
 
           <form
-            className="border border-border bg-card p-6 sm:p-8"
+            className="rounded-3xl border border-border bg-card soft-card p-6 sm:p-8"
             onSubmit={(e) => {
               e.preventDefault();
               setSent(true);
@@ -406,12 +540,13 @@ function Index() {
                   <select
                     id="project"
                     name="project"
-                    className="h-11 border border-input bg-background px-3 text-sm outline-none focus:border-gold"
+                    className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
                   >
                     <option>New deck build</option>
                     <option>Deck restoration / staining</option>
                     <option>Repairs &amp; board replacement</option>
                     <option>Railings, stairs or privacy screens</option>
+                    <option>Annual maintenance plan</option>
                     <option>Not sure — need an inspection</option>
                   </select>
                 </div>
@@ -425,12 +560,12 @@ function Index() {
                     rows={4}
                     maxLength={1000}
                     placeholder="Approx. size, age of the deck, what's bothering you about it…"
-                    className="border border-input bg-background p-3 text-sm outline-none focus:border-gold"
+                    className="rounded-xl border border-input bg-background p-3 text-sm outline-none focus:border-gold"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="mt-2 bg-gold px-6 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-opacity hover:opacity-90"
+                  className="mt-2 rounded-full bg-gold px-6 py-4 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90"
                 >
                   Request my estimate
                 </button>
@@ -476,7 +611,7 @@ function Field({
         type={type}
         required={required}
         maxLength={200}
-        className="h-11 border border-input bg-background px-3 text-sm outline-none focus:border-gold"
+        className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
       />
     </div>
   );
