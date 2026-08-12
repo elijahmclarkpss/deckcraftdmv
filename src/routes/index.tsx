@@ -335,9 +335,9 @@ function Index() {
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
             {[
-              ["14", "Years in RVA"],
-              ["600+", "Decks completed"],
-              ["4.9★", "Google rating"],
+              ["6", "Years in RVA"],
+              ["200+", "Decks completed"],
+              ["5★", "Google rating"],
             ].map(([n, l]) => (
               <div key={l}>
                 <p className="font-display text-2xl text-gold">{n}</p>
