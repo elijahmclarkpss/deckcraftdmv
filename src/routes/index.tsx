@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Check,
   Star,
@@ -20,16 +20,18 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 import heroGrayDeck from "@/assets/hero-gray-deck.jpg";
-import grayStairs from "@/assets/gray-stairs.jpg";
 import newDeckWhiteRail from "@/assets/new-deck-white-rail.jpg";
-import grayDeckSteps from "@/assets/gray-deck-steps.jpg";
 import redStairs from "@/assets/red-stairs.jpg";
 import grayDeckYard from "@/assets/gray-deck-yard.jpg";
 import stageBefore from "@/assets/stage-before.jpg";
 import stageNewBoards from "@/assets/stage-new-boards.jpg";
+import restoreBefore from "@/assets/restore-before.jpg";
+import restoreAfter from "@/assets/restore-after.jpg";
+import repairsBefore from "@/assets/repairs-before.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,7 +63,7 @@ export const Route = createFileRoute("/")({
           aggregateRating: {
             "@type": "AggregateRating",
             ratingValue: "4.9",
-            reviewCount: "118",
+            reviewCount: "70",
           },
           address: {
             "@type": "PostalAddress",
@@ -92,7 +94,6 @@ const services = [
   {
     icon: Hammer,
     title: "New Deck Construction",
-    price: "from $42 / sq ft",
     body: "Ground-level platforms, multi-level layouts, wrap-arounds and curved edges — permitted, properly footed, and framed for Virginia freeze-thaw.",
     img: newDeckWhiteRail,
     alt: "New deck with white railings and composite boards built behind a Richmond-area home",
@@ -106,10 +107,19 @@ const services = [
   {
     icon: Paintbrush,
     title: "Restoration & Staining",
-    price: "from $6 / sq ft",
     body: "Strip, sand, replace the boards that are gone, then seal with a solid-color stain that lands even across old and new wood.",
-    img: grayDeckSteps,
-    alt: "Weathered deck restored with solid charcoal stain and rebuilt cascading stairs",
+    slides: [
+      {
+        label: "Before",
+        img: restoreBefore,
+        alt: "Faded, mildewed deck stairs and railing being pressure-washed before restoration",
+      },
+      {
+        label: "After",
+        img: restoreAfter,
+        alt: "The same deck stairs and railing restored with an even solid brown stain",
+      },
+    ],
     includes: [
       "Deep clean + mildew treatment",
       "Board replacement as needed",
@@ -120,10 +130,19 @@ const services = [
   {
     icon: Wrench,
     title: "Repairs, Stairs & Railings",
-    price: "from $650",
     body: "Soft boards, bouncing joists, wobbly rails, stair runs that never felt right. We fix the failure instead of selling you a teardown.",
-    img: redStairs,
-    alt: "Rebuilt deck stairs and railings finished in a red stain with lattice skirting",
+    slides: [
+      {
+        label: "Before",
+        img: repairsBefore,
+        alt: "Rotted deck boards pulled up to expose the framing before repair",
+      },
+      {
+        label: "After",
+        img: grayDeckYard,
+        alt: "The same deck rebuilt with new boards and a solid charcoal stain",
+      },
+    ],
     includes: [
       "Rot + structural inspection",
       "Code-compliant railing systems",
@@ -134,10 +153,9 @@ const services = [
   {
     icon: CalendarCheck,
     title: "Annual Maintenance",
-    price: "$389 / year",
     body: "One spring visit: wash off the pollen and mildew, spot-treat, then refresh the top coat before UV gets through it.",
-    img: grayDeckYard,
-    alt: "Curved charcoal deck overlooking a shaded Richmond backyard garden",
+    img: redStairs,
+    alt: "Well-kept red-stained deck with stairs and lattice skirting in a shaded backyard",
     includes: [
       "Spring wash + mildew treatment",
       "Fastener + board check",
@@ -208,14 +226,7 @@ const faqs = [
   },
 ];
 
-const gallery = [
-  heroGrayDeck,
-  grayDeckSteps,
-  newDeckWhiteRail,
-  redStairs,
-  grayStairs,
-  grayDeckYard,
-].map((src, i) => ({
+const gallery = [heroGrayDeck, newDeckWhiteRail, redStairs].map((src, i) => ({
   src,
   alt: `Richmond deck project photo ${i + 1} by Deck Craft RVA`,
 }));
@@ -253,6 +264,31 @@ function StageCarousel() {
       </CarouselContent>
       <CarouselPrevious className="left-4 border-gold/40 bg-ink/70 text-gold hover:bg-ink hover:text-gold" />
       <CarouselNext className="right-4 border-gold/40 bg-ink/70 text-gold hover:bg-ink hover:text-gold" />
+    </Carousel>
+  );
+}
+
+function AutoCarousel({ slides }: { slides: { label: string; img: string; alt: string }[] }) {
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => api.scrollNext(), 3500);
+    return () => clearInterval(id);
+  }, [api]);
+
+  return (
+    <Carousel setApi={setApi} opts={{ loop: true }}>
+      <CarouselContent>
+        {slides.map((sl) => (
+          <CarouselItem key={sl.label} className="relative">
+            <img src={sl.img} alt={sl.alt} loading="lazy" className="h-56 w-full object-cover" />
+            <span className="absolute left-8 top-4 rounded-full bg-ink/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+              {sl.label}
+            </span>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
     </Carousel>
   );
 }
@@ -335,7 +371,7 @@ function Index() {
                 <Star key={i} className="h-4 w-4 fill-current" />
               ))}
             </span>
-            118 five-star reviews in Richmond
+            70+ five-star reviews in Richmond
           </div>
         </div>
 
@@ -375,7 +411,7 @@ function Index() {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
           <h2 className="mt-4 font-display text-3xl tracking-wide">One crew, from demo to final walkthrough.</h2>
           <p className="mt-5 leading-relaxed text-foreground/75">
-            We've been building and restoring decks in the Richmond area since 2011 — no subcontractor handoffs, no
+            We've been building and restoring decks in the Richmond area since 2015 — no subcontractor handoffs, no
             rotating faces in your backyard.
           </p>
           <p className="mt-4 leading-relaxed text-foreground/70">
@@ -385,8 +421,8 @@ function Index() {
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
             {[
-              ["6", "Years in RVA"],
-              ["200+", "Decks completed"],
+              ["9", "Years in RVA"],
+              ["170+", "Decks completed"],
               ["5★", "Google rating"],
             ].map(([n, l]) => (
               <div key={l}>
@@ -408,16 +444,15 @@ function Index() {
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {services.map((s) => (
               <article key={s.title} className="overflow-hidden rounded-2xl border border-border bg-card soft-card">
-                <img src={s.img} alt={s.alt} loading="lazy" className="h-56 w-full object-cover" />
+                {s.slides ? (
+                  <AutoCarousel slides={s.slides} />
+                ) : (
+                  <img src={s.img} alt={s.alt} loading="lazy" className="h-56 w-full object-cover" />
+                )}
                 <div className="p-6 sm:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <s.icon className="h-5 w-5 text-gold" />
-                      <h3 className="font-display text-xl">{s.title}</h3>
-                    </div>
-                    <span className="shrink-0 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
-                      {s.price}
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <s.icon className="h-5 w-5 text-gold" />
+                    <h3 className="font-display text-xl">{s.title}</h3>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-foreground/70">{s.body}</p>
                   <ul className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -539,8 +574,8 @@ function Index() {
               <a href={PHONE_HREF} className="flex items-center gap-3 hover:text-gold">
                 <Phone className="h-5 w-5 text-gold" /> {PHONE}
               </a>
-              <a href="mailto:hello@deckcraftrva.com" className="flex items-center gap-3 hover:text-gold">
-                <Mail className="h-5 w-5 text-gold" /> hello@deckcraftrva.com
+              <a href="mailto:deckcraftdmv@gmail.com" className="flex items-center gap-3 hover:text-gold">
+                <Mail className="h-5 w-5 text-gold" /> deckcraftdmv@gmail.com
               </a>
               <p className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-gold" /> Richmond, Virginia
@@ -620,7 +655,7 @@ function Index() {
       <footer className="border-t border-border bg-ink py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-sm text-muted-foreground sm:flex-row">
           <span className="font-display tracking-[0.2em] text-gold">DECK CRAFT</span>
-          <span>Licensed &amp; insured · Richmond, Virginia</span>
+          <span>Insured · Richmond, Virginia</span>
           <span>© {new Date().getFullYear()} Deck Craft RVA</span>
         </div>
       </footer>
