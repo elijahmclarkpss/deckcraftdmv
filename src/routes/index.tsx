@@ -14,16 +14,22 @@ import {
   Wrench,
   CalendarCheck,
 } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-import deck1Src from "@/assets/deck1.jpg";
-import deck2Src from "@/assets/deck2.jpg";
-import deck3Src from "@/assets/deck3.jpg";
-import deck4Src from "@/assets/deck4.jpg";
-
-const deck1 = { url: deck1Src };
-const deck2 = { url: deck2Src };
-const deck3 = { url: deck3Src };
-const deck4 = { url: deck4Src };
+import heroGrayDeck from "@/assets/hero-gray-deck.jpg";
+import grayStairs from "@/assets/gray-stairs.jpg";
+import newDeckWhiteRail from "@/assets/new-deck-white-rail.jpg";
+import grayDeckSteps from "@/assets/gray-deck-steps.jpg";
+import redStairs from "@/assets/red-stairs.jpg";
+import grayDeckYard from "@/assets/gray-deck-yard.jpg";
+import stageBefore from "@/assets/stage-before.jpg";
+import stageNewBoards from "@/assets/stage-new-boards.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -88,8 +94,8 @@ const services = [
     title: "New Deck Construction",
     price: "from $42 / sq ft",
     body: "Ground-level platforms, multi-level layouts, wrap-arounds and curved edges — permitted, properly footed, and framed for Virginia freeze-thaw.",
-    img: deck1.url,
-    alt: "Custom multi-level deck with lattice privacy screens built in Richmond, VA",
+    img: newDeckWhiteRail,
+    alt: "New deck with white railings and composite boards built behind a Richmond-area home",
     includes: [
       "Design + permit handling",
       "Concrete footings below frost line",
@@ -102,7 +108,7 @@ const services = [
     title: "Restoration & Staining",
     price: "from $6 / sq ft",
     body: "Strip, sand, replace the boards that are gone, then seal with a solid-color stain that lands even across old and new wood.",
-    img: deck3.url,
+    img: grayDeckSteps,
     alt: "Weathered deck restored with solid charcoal stain and rebuilt cascading stairs",
     includes: [
       "Deep clean + mildew treatment",
@@ -116,8 +122,8 @@ const services = [
     title: "Repairs, Stairs & Railings",
     price: "from $650",
     body: "Soft boards, bouncing joists, wobbly rails, stair runs that never felt right. We fix the failure instead of selling you a teardown.",
-    img: deck2.url,
-    alt: "Refinished deck stairs and black railing with lattice panels",
+    img: redStairs,
+    alt: "Rebuilt deck stairs and railings finished in a red stain with lattice skirting",
     includes: [
       "Rot + structural inspection",
       "Code-compliant railing systems",
@@ -130,8 +136,8 @@ const services = [
     title: "Annual Maintenance",
     price: "$389 / year",
     body: "One spring visit: wash off the pollen and mildew, spot-treat, then refresh the top coat before UV gets through it.",
-    img: deck4.url,
-    alt: "Curved deck edge overlooking a shaded Richmond backyard garden",
+    img: grayDeckYard,
+    alt: "Curved charcoal deck overlooking a shaded Richmond backyard garden",
     includes: [
       "Spring wash + mildew treatment",
       "Fastener + board check",
@@ -202,10 +208,54 @@ const faqs = [
   },
 ];
 
-const gallery = [deck1, deck3, deck2, deck4, deck3, deck1].map((d, i) => ({
-  src: d.url,
+const gallery = [
+  heroGrayDeck,
+  grayDeckSteps,
+  newDeckWhiteRail,
+  redStairs,
+  grayStairs,
+  grayDeckYard,
+].map((src, i) => ({
+  src,
   alt: `Richmond deck project photo ${i + 1} by Deck Craft RVA`,
 }));
+
+const stages = [
+  {
+    label: "Before",
+    img: stageBefore,
+    alt: "Worn, mildewed deck with rotted boards pulled up before restoration",
+  },
+  {
+    label: "Boards Replaced",
+    img: stageNewBoards,
+    alt: "New pressure-treated deck boards and rebuilt cascading stairs installed",
+  },
+  {
+    label: "Stained",
+    img: heroGrayDeck,
+    alt: "The same deck finished in a solid charcoal stain with wide steps",
+  },
+];
+
+function StageCarousel() {
+  return (
+    <Carousel opts={{ loop: true }} className="overflow-hidden rounded-3xl">
+      <CarouselContent>
+        {stages.map((st, i) => (
+          <CarouselItem key={st.label} className="relative">
+            <img src={st.img} alt={st.alt} loading="lazy" className="h-[26rem] w-full rounded-3xl object-cover" />
+            <span className="absolute left-8 top-4 rounded-full bg-ink/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+              {i + 1} · {st.label}
+            </span>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="left-4 border-gold/40 bg-ink/70 text-gold hover:bg-ink hover:text-gold" />
+      <CarouselNext className="right-4 border-gold/40 bg-ink/70 text-gold hover:bg-ink hover:text-gold" />
+    </Carousel>
+  );
+}
 
 function Index() {
   const [sent, setSent] = useState(false);
@@ -256,7 +306,7 @@ function Index() {
       {/* Hero */}
       <section id="top" className="relative min-h-[92vh] overflow-hidden">
         <img
-          src={deck1.url}
+          src={heroGrayDeck}
           alt="Freshly restored charcoal deck with wide steps and black lattice privacy screens at a Richmond home"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -320,12 +370,7 @@ function Index() {
 
       {/* About */}
       <section id="about" className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-2 lg:py-28">
-        <img
-          src={deck4.url}
-          alt="Deck Craft crew's finished deck surface leading into a landscaped Richmond backyard"
-          loading="lazy"
-          className="h-[26rem] w-full rounded-3xl object-cover"
-        />
+        <StageCarousel />
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
           <h2 className="mt-4 font-display text-3xl tracking-wide">One crew, from demo to final walkthrough.</h2>
