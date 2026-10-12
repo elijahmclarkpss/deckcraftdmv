@@ -15,10 +15,15 @@ import {
   CalendarCheck,
 } from "lucide-react";
 
-import deck1 from "@/assets/deck1.jpg.asset.json";
-import deck2 from "@/assets/deck2.jpg.asset.json";
-import deck3 from "@/assets/deck3.jpg.asset.json";
-import deck4 from "@/assets/deck4.jpg.asset.json";
+import deck1Src from "@/assets/deck1.jpg";
+import deck2Src from "@/assets/deck2.jpg";
+import deck3Src from "@/assets/deck3.jpg";
+import deck4Src from "@/assets/deck4.jpg";
+
+const deck1 = { url: deck1Src };
+const deck2 = { url: deck2Src };
+const deck3 = { url: deck3Src };
+const deck4 = { url: deck4Src };
 
 export const Route = createFileRoute("/")({
   head: () => ({
