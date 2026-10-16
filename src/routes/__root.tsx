@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -34,7 +35,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -77,22 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Deck Craft | Deck Building & Restoration in Richmond, VA" },
-      {
-        name: "description",
-        content:
-          "Custom deck building, repair, staining and restoration across Richmond, VA. Free on-site estimates from a local, insured crew.",
-      },
-      { name: "author", content: "Deck Craft" },
-      { property: "og:title", content: "Deck Craft | Richmond Deck Builders" },
-      {
-        property: "og:description",
-        content:
-          "Custom deck building, repair and restoration across Greater Richmond, Virginia.",
-      },
+      { name: "author", content: "DeckCraft" },
+      { property: "og:site_name", content: "DeckCraft" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

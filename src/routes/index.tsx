@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { business, businessSchema, formatOpeningHours, seoTitle, seoDescription, shareImage } from "@/lib/business";
 import {
   Check,
   Star,
@@ -36,41 +38,36 @@ import repairsBefore from "@/assets/repairs-before.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Deck Craft | Deck Building & Restoration in Richmond, VA" },
-      {
-        name: "description",
-        content:
-          "Richmond deck builders specializing in custom decks, rebuilds, board replacement, railings, staining and full restorations. Free estimates across RVA.",
-      },
-      { property: "og:title", content: "Deck Craft | Richmond Deck Builders" },
-      {
-        property: "og:description",
-        content: "Custom deck building and restoration in Greater Richmond, Virginia. Free on-site estimates.",
-      },
+      { title: seoTitle },
+      { name: "description", content: seoDescription },
+      { property: "og:title", content: seoTitle },
+      { property: "og:description", content: seoDescription },
+      { name: "twitter:title", content: seoTitle },
+      { name: "twitter:description", content: seoDescription },
+      { property: "og:url", content: business.url },
+      { property: "og:image", content: shareImage },
+      { name: "twitter:image", content: shareImage },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: business.url }],
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(businessSchema),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "HomeAndConstructionBusiness",
-          name: "Deck Craft",
-          description: "Deck building and restoration contractor serving Richmond, Virginia.",
-          telephone: "+1-804-399-9722",
-          areaServed: "Richmond, VA",
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.9",
-            reviewCount: "70",
-          },
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Richmond",
-            addressRegion: "VA",
-            addressCountry: "US",
-          },
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: { "@type": "Answer", text: faq.a },
+          })),
         }),
       },
     ],
@@ -228,7 +225,7 @@ const faqs = [
 
 const gallery = [heroGrayDeck, newDeckWhiteRail, redStairs].map((src, i) => ({
   src,
-  alt: `Richmond deck project photo ${i + 1} by Deck Craft`,
+  alt: `Richmond deck project photo ${i + 1} by DeckCraft`,
 }));
 
 const stages = [
@@ -306,7 +303,7 @@ function Index() {
             <span className="border border-gold/60 px-3 py-1.5 font-display text-base tracking-[0.15em] text-gold">
               DC
             </span>
-            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">DECK CRAFT</span>
+            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">DeckCraft</span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-foreground/80 lg:flex">
             <a href="#services" className="transition-colors hover:text-gold">
@@ -348,13 +345,13 @@ function Index() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/75 to-ink/90" />
         <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pb-32 pt-28 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">
-            Deck Building &amp; Restoration · Richmond, VA
-          </p>
-          <h1 className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
+          <h1 className="hero-eyebrow text-xs font-semibold uppercase tracking-[0.24em] text-gold">
+            Deck Builder in Richmond, VA - Building &amp; Restoration
+          </h1>
+          <div className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
             Your deck, rebuilt right.
             <span className="mt-2 block text-gold">PROTECT YOUR INVESTMENT.</span>
-          </h1>
+          </div>
           <p className="mt-6 max-w-xl text-foreground/80">
             Custom builds, full restorations, staining and structural repairs across the Richmond metro — from one crew,
             start to finish.
@@ -411,7 +408,7 @@ function Index() {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">About Us</p>
           <h2 className="mt-4 font-display text-3xl tracking-wide">One crew, from demo to final walkthrough.</h2>
           <p className="mt-5 leading-relaxed text-foreground/75">
-            We've been building and restoring decks in the Richmond area since 2015 — no subcontractor handoffs, no
+            We've been building and restoring decks in the Richmond area since {business.foundingYear} — no subcontractor handoffs, no
             rotating faces in your backyard.
           </p>
           <p className="mt-4 leading-relaxed text-foreground/70">
@@ -421,7 +418,7 @@ function Index() {
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
             {[
-              ["9", "Years in RVA"],
+              ["9", "Years in Richmond"],
               ["170+", "Decks completed"],
               ["5★", "Google rating"],
             ].map(([n, l]) => (
@@ -506,7 +503,7 @@ function Index() {
           </p>
           <div className="mt-10 overflow-hidden rounded-3xl border border-border">
             <iframe
-              title="Map of the Deck Craft service area across the Richmond, Virginia metro"
+              title="Map of the DeckCraft service area across the Richmond, Virginia metro"
               src="https://www.openstreetmap.org/export/embed.html?bbox=-78.05%2C37.30%2C-77.10%2C37.80&layer=mapnik"
               className="h-[22rem] w-full"
               loading="lazy"
@@ -544,16 +541,19 @@ function Index() {
         <div className="mt-10 divide-y divide-border border-y border-border">
           {faqs.map((f, i) => (
             <div key={f.q}>
-              <button
+              <Button
+                variant="ghost"
                 type="button"
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                aria-controls={`faq-answer-${i}`}
+                id={`faq-question-${i}`}
+                className="flex h-auto w-full items-center justify-between gap-4 whitespace-normal rounded-none px-0 py-5 text-left text-base hover:bg-transparent hover:text-foreground"
               >
                 <span className="font-medium">{f.q}</span>
                 <Plus className={`h-5 w-5 shrink-0 text-gold transition-transform ${open === i ? "rotate-45" : ""}`} />
-              </button>
-              {open === i && <p className="pb-5 text-sm leading-relaxed text-foreground/70">{f.a}</p>}
+              </Button>
+              <p id={`faq-answer-${i}`} aria-labelledby={`faq-question-${i}`} hidden={open !== i} className="pb-5 text-sm leading-relaxed text-foreground/70">{f.a}</p>
             </div>
           ))}
         </div>
@@ -563,7 +563,7 @@ function Index() {
       <section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Free Estimate</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold" aria-label={business.estimateArea}>Free Estimate</p>
             <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
               Tell us what you've got. We'll come look at it.
             </h2>
@@ -581,7 +581,7 @@ function Index() {
                 <MapPin className="h-5 w-5 text-gold" /> Richmond, Virginia
               </p>
               <p className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-gold" /> Mon–Sat, 7am – 6pm
+                <Clock className="h-5 w-5 shrink-0 text-gold" /> {formatOpeningHours(business.openingHoursSpecification)}
               </p>
             </div>
           </div>
@@ -654,9 +654,9 @@ function Index() {
 
       <footer className="border-t border-border bg-ink py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-sm text-muted-foreground sm:flex-row">
-          <span className="font-display tracking-[0.2em] text-gold">DECK CRAFT</span>
+          <span className="font-display tracking-[0.2em] text-gold">DeckCraft</span>
           <span>Insured · Richmond, Virginia</span>
-          <span>© {new Date().getFullYear()} Deck Craft</span>
+          <span>© {new Date().getFullYear()} DeckCraft</span>
         </div>
       </footer>
     </div>
