@@ -4,14 +4,18 @@ import { getLandingPage, landingPageHead, landingPages } from './landing-pages';
 describe('local service scope', () => {
   test('service provider is DeckCraft', () => {
     for (const page of landingPages) {
-      const service = JSON.parse(landingPageHead(page).scripts[1].children);
+      const script = landingPageHead(page).scripts[1];
+      if (!script) throw new Error('Missing service schema');
+      const service = JSON.parse(script.children);
       expect(service.provider.name).toBe('DeckCraft');
     }
   });
   test('area pages serve their named jurisdiction', () => {
     const areas = [['/richmond', 'City of Richmond VA'], ['/henrico', 'Henrico County VA'], ['/chesterfield', 'Chesterfield County VA'], ['/hanover', 'Hanover County VA']] as const;
     for (const [path, name] of areas) {
-      const service = JSON.parse(landingPageHead(getLandingPage(path)).scripts[1].children);
+      const script = landingPageHead(getLandingPage(path)).scripts[1];
+      if (!script) throw new Error('Missing service schema');
+      const service = JSON.parse(script.children);
       expect(service.areaServed.name).toBe(name);
     }
   });
