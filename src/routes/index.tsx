@@ -36,13 +36,13 @@ import repairsBefore from "@/assets/repairs-before.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Deck Craft RVA | Deck Building & Restoration in Richmond, VA" },
+      { title: "Deck Craft | Deck Building & Restoration in Richmond, VA" },
       {
         name: "description",
         content:
           "Richmond deck builders specializing in custom decks, rebuilds, board replacement, railings, staining and full restorations. Free estimates across RVA.",
       },
-      { property: "og:title", content: "Deck Craft RVA | Richmond Deck Builders" },
+      { property: "og:title", content: "Deck Craft | Richmond Deck Builders" },
       {
         property: "og:description",
         content: "Custom deck building and restoration in Greater Richmond, Virginia. Free on-site estimates.",
@@ -56,7 +56,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HomeAndConstructionBusiness",
-          name: "Deck Craft RVA",
+          name: "Deck Craft",
           description: "Deck building and restoration contractor serving Richmond, Virginia.",
           telephone: "+1-804-399-9722",
           areaServed: "Richmond, VA",
@@ -228,7 +228,7 @@ const faqs = [
 
 const gallery = [heroGrayDeck, newDeckWhiteRail, redStairs].map((src, i) => ({
   src,
-  alt: `Richmond deck project photo ${i + 1} by Deck Craft RVA`,
+  alt: `Richmond deck project photo ${i + 1} by Deck Craft`,
 }));
 
 const stages = [
@@ -656,7 +656,7 @@ function Index() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-sm text-muted-foreground sm:flex-row">
           <span className="font-display tracking-[0.2em] text-gold">DECK CRAFT</span>
           <span>Insured · Richmond, Virginia</span>
-          <span>© {new Date().getFullYear()} Deck Craft RVA</span>
+          <span>© {new Date().getFullYear()} Deck Craft</span>
         </div>
       </footer>
     </div>

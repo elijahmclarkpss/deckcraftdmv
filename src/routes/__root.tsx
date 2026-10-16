@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Custom deck building, repair, staining and restoration across Richmond, VA. Free on-site estimates from a local, insured crew.",
       },
-      { name: "author", content: "Deck Craft RVA" },
+      { name: "author", content: "Deck Craft" },
       { property: "og:title", content: "Deck Craft | Richmond Deck Builders" },
       {
         property: "og:description",
