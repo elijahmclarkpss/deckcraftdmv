@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChesterfieldRouteImport } from './routes/chesterfield'
+import { Route as DeckBuildingRouteImport } from './routes/deck-building'
+import { Route as DeckMaintenanceRouteImport } from './routes/deck-maintenance'
+import { Route as DeckRepairRouteImport } from './routes/deck-repair'
+import { Route as DeckRestorationStainingRouteImport } from './routes/deck-restoration-staining'
+import { Route as HanoverRouteImport } from './routes/hanover'
+import { Route as HenricoRouteImport } from './routes/henrico'
+import { Route as RichmondRouteImport } from './routes/richmond'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChesterfieldRoute = ChesterfieldRouteImport.update({
+  id: '/chesterfield',
+  path: '/chesterfield',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeckBuildingRoute = DeckBuildingRouteImport.update({
+  id: '/deck-building',
+  path: '/deck-building',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeckMaintenanceRoute = DeckMaintenanceRouteImport.update({
+  id: '/deck-maintenance',
+  path: '/deck-maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeckRepairRoute = DeckRepairRouteImport.update({
+  id: '/deck-repair',
+  path: '/deck-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeckRestorationStainingRoute = DeckRestorationStainingRouteImport.update({
+  id: '/deck-restoration-staining',
+  path: '/deck-restoration-staining',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HanoverRoute = HanoverRouteImport.update({
+  id: '/hanover',
+  path: '/hanover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HenricoRoute = HenricoRouteImport.update({
+  id: '/henrico',
+  path: '/henrico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RichmondRoute = RichmondRouteImport.update({
+  id: '/richmond',
+  path: '/richmond',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chesterfield': typeof ChesterfieldRoute
+  '/deck-building': typeof DeckBuildingRoute
+  '/deck-maintenance': typeof DeckMaintenanceRoute
+  '/deck-repair': typeof DeckRepairRoute
+  '/deck-restoration-staining': typeof DeckRestorationStainingRoute
+  '/hanover': typeof HanoverRoute
+  '/henrico': typeof HenricoRoute
+  '/richmond': typeof RichmondRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chesterfield': typeof ChesterfieldRoute
+  '/deck-building': typeof DeckBuildingRoute
+  '/deck-maintenance': typeof DeckMaintenanceRoute
+  '/deck-repair': typeof DeckRepairRoute
+  '/deck-restoration-staining': typeof DeckRestorationStainingRoute
+  '/hanover': typeof HanoverRoute
+  '/henrico': typeof HenricoRoute
+  '/richmond': typeof RichmondRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chesterfield': typeof ChesterfieldRoute
+  '/deck-building': typeof DeckBuildingRoute
+  '/deck-maintenance': typeof DeckMaintenanceRoute
+  '/deck-repair': typeof DeckRepairRoute
+  '/deck-restoration-staining': typeof DeckRestorationStainingRoute
+  '/hanover': typeof HanoverRoute
+  '/henrico': typeof HenricoRoute
+  '/richmond': typeof RichmondRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/chesterfield'
+    | '/deck-building'
+    | '/deck-maintenance'
+    | '/deck-repair'
+    | '/deck-restoration-staining'
+    | '/hanover'
+    | '/henrico'
+    | '/richmond'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/chesterfield'
+    | '/deck-building'
+    | '/deck-maintenance'
+    | '/deck-repair'
+    | '/deck-restoration-staining'
+    | '/hanover'
+    | '/henrico'
+    | '/richmond'
+  id:
+    | '__root__'
+    | '/'
+    | '/chesterfield'
+    | '/deck-building'
+    | '/deck-maintenance'
+    | '/deck-repair'
+    | '/deck-restoration-staining'
+    | '/hanover'
+    | '/henrico'
+    | '/richmond'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChesterfieldRoute: typeof ChesterfieldRoute
+  DeckBuildingRoute: typeof DeckBuildingRoute
+  DeckMaintenanceRoute: typeof DeckMaintenanceRoute
+  DeckRepairRoute: typeof DeckRepairRoute
+  DeckRestorationStainingRoute: typeof DeckRestorationStainingRoute
+  HanoverRoute: typeof HanoverRoute
+  HenricoRoute: typeof HenricoRoute
+  RichmondRoute: typeof RichmondRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chesterfield': {
+      id: '/chesterfield'
+      path: '/chesterfield'
+      fullPath: '/chesterfield'
+      preLoaderRoute: typeof ChesterfieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deck-building': {
+      id: '/deck-building'
+      path: '/deck-building'
+      fullPath: '/deck-building'
+      preLoaderRoute: typeof DeckBuildingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deck-maintenance': {
+      id: '/deck-maintenance'
+      path: '/deck-maintenance'
+      fullPath: '/deck-maintenance'
+      preLoaderRoute: typeof DeckMaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deck-repair': {
+      id: '/deck-repair'
+      path: '/deck-repair'
+      fullPath: '/deck-repair'
+      preLoaderRoute: typeof DeckRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deck-restoration-staining': {
+      id: '/deck-restoration-staining'
+      path: '/deck-restoration-staining'
+      fullPath: '/deck-restoration-staining'
+      preLoaderRoute: typeof DeckRestorationStainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hanover': {
+      id: '/hanover'
+      path: '/hanover'
+      fullPath: '/hanover'
+      preLoaderRoute: typeof HanoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/henrico': {
+      id: '/henrico'
+      path: '/henrico'
+      fullPath: '/henrico'
+      preLoaderRoute: typeof HenricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/richmond': {
+      id: '/richmond'
+      path: '/richmond'
+      fullPath: '/richmond'
+      preLoaderRoute: typeof RichmondRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChesterfieldRoute: ChesterfieldRoute,
+  DeckBuildingRoute: DeckBuildingRoute,
+  DeckMaintenanceRoute: DeckMaintenanceRoute,
+  DeckRepairRoute: DeckRepairRoute,
+  DeckRestorationStainingRoute: DeckRestorationStainingRoute,
+  HanoverRoute: HanoverRoute,
+  HenricoRoute: HenricoRoute,
+  RichmondRoute: RichmondRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
