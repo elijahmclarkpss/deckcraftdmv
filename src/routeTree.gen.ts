@@ -18,6 +18,7 @@ import { Route as DeckRestorationStainingRouteImport } from './routes/deck-resto
 import { Route as HanoverRouteImport } from './routes/hanover'
 import { Route as HenricoRouteImport } from './routes/henrico'
 import { Route as RichmondRouteImport } from './routes/richmond'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,12 @@ const RichmondRoute = RichmondRouteImport.update({
   path: '/richmond',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/hanover': typeof HanoverRoute
   '/henrico': typeof HenricoRoute
   '/richmond': typeof RichmondRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +94,7 @@ export interface FileRoutesByTo {
   '/hanover': typeof HanoverRoute
   '/henrico': typeof HenricoRoute
   '/richmond': typeof RichmondRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +107,7 @@ export interface FileRoutesById {
   '/hanover': typeof HanoverRoute
   '/henrico': typeof HenricoRoute
   '/richmond': typeof RichmondRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/hanover'
     | '/henrico'
     | '/richmond'
+    | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/hanover'
     | '/henrico'
     | '/richmond'
+    | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
@@ -133,6 +145,7 @@ export interface FileRouteTypes {
     | '/hanover'
     | '/henrico'
     | '/richmond'
+    | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +158,7 @@ export interface RootRouteChildren {
   HanoverRoute: typeof HanoverRoute
   HenricoRoute: typeof HenricoRoute
   RichmondRoute: typeof RichmondRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RichmondRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +246,7 @@ const rootRouteChildren: RootRouteChildren = {
   HanoverRoute: HanoverRoute,
   HenricoRoute: HenricoRoute,
   RichmondRoute: RichmondRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

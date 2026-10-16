@@ -16,9 +16,25 @@ export const submitEstimate = createServerFn({ method: 'POST' })
       if (typeof saved === 'object' && !Array.isArray(saved) && saved['limited'] === true) {
         return { success: false, message: 'Too many requests. Please wait 15 minutes or call or text (804) 399-9722.' };
       }
-      // Sender domain setup is pending. Never report delivery until the managed
-      // sendTemplateEmail helper confirms the fixed estimate-notification send.
-      // The saved estimate is retained even while email is unavailable.
+      if (typeof saved !== 'object' || Array.isArray(saved)
+        || typeof saved['id'] !== 'string' || typeof saved['created_at'] !== 'string') {
+        return { success: false, message: estimateFailure };
+      }
+      try {
+        const { sendTemplateEmail } = await import('./email-templates/send-email');
+        const result = await sendTemplateEmail('estimate-notification', 'deckcraftdmv@gmail.com', {
+          templateData: {
+            name: data.name, phone: data.phone, email: data.email, address: data.address,
+            project: data.project, details: data.details, pageUrl: data.pageUrl,
+            submittedAt: saved['created_at'],
+          },
+          replyTo: data.email,
+          idempotencyKey: `estimate-notification-${saved['id']}`,
+        });
+        if (result.sent) return { success: true };
+      } catch {
+        // Delivery failures never undo the permanent backup or report success.
+      }
       return { success: false, message: `${estimateFailure} Your request has been saved as a backup.` };
     } catch {
       return { success: false, message: 'We could not complete your request. Please call or text (804) 399-9722.' };
