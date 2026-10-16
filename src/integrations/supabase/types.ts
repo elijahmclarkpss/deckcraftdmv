@@ -14,13 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      estimate_requests: {
+        Row: {
+          address: string
+          created_at: string
+          email: string
+          id: string
+          name: string
+          page_url: string
+          phone: string
+          project_details: string
+          project_type: string
+        }
+        Insert: {
+          address?: string
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          page_url: string
+          phone: string
+          project_details?: string
+          project_type: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          page_url?: string
+          phone?: string
+          project_details?: string
+          project_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      save_estimate_request: {
+        Args: {
+          p_address: string
+          p_email: string
+          p_name: string
+          p_page_url: string
+          p_phone: string
+          p_project_details: string
+          p_project_type: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

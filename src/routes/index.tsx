@@ -1,11 +1,11 @@
 import { EstimateSection } from "@/components/site/estimate-section";
+import { ReviewsStrip } from "@/components/site/reviews-strip";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { business, businessSchema, seoTitle, seoDescription, shareImage } from "@/lib/business";
 import {
   Check,
-  Star,
   Phone,
   ArrowRight,
   Plus,
@@ -75,15 +75,6 @@ export const Route = createFileRoute("/")({
 
 const PHONE = "(804) 399-9722";
 const PHONE_HREF = "tel:+18043999722";
-
-const tickerReviews = [
-  { q: "Our 20-year-old deck was gray and splintering — now it looks brand new.", n: "Karen M." },
-  { q: "The only company that crawled under the deck before quoting it.", n: "Dave R." },
-  { q: "Clean crew, on schedule, swept the site every single evening.", n: "Priya S." },
-  { q: "Rebuilt our stairs and railing in two days. Rock solid now.", n: "Tom B." },
-  { q: "The charcoal stain landed perfectly even across old and new boards.", n: "Alicia W." },
-  { q: "Found rot three other bidders missed. Saved us a full rebuild later.", n: "Greg H." },
-];
 
 const services = [
   {
@@ -327,29 +318,10 @@ function Index() {
           >
             Get a Free Estimate <ArrowRight className="h-4 w-4" />
           </a>
-          <div className="mt-7 flex items-center gap-2 text-sm text-foreground/80">
-            <span className="flex text-gold">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-current" />
-              ))}
-            </span>
-            70+ five-star reviews in Richmond
-          </div>
         </div>
 
         {/* Review ticker */}
-        <div className="absolute inset-x-0 bottom-0 border-t border-border bg-ink/85 py-4 backdrop-blur">
-          <div className="flex w-max animate-[marquee_44s_linear_infinite] gap-10 pr-10">
-            {[...tickerReviews, ...tickerReviews].map((r, i) => (
-              <span key={i} className="flex shrink-0 items-center gap-3 text-sm">
-                <span className="text-gold">“</span>
-                <span className="text-foreground/75">{r.q}</span>
-                <span className="text-muted-foreground">{r.n}</span>
-                <span className="text-border">|</span>
-              </span>
-            ))}
-          </div>
-        </div>
+        <ReviewsStrip />
       </section>
 
       {/* Materials */}
@@ -385,7 +357,7 @@ function Index() {
             {[
               ["9", "Years in Richmond"],
               ["170+", "Decks completed"],
-              ["5★", "Google rating"],
+              ["48 hr", "Estimate scheduling"],
             ].map(([n, l]) => (
               <div key={l}>
                 <p className="font-display text-2xl text-gold">{n}</p>
