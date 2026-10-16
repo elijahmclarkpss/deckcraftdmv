@@ -36,7 +36,7 @@ function EstimateNotification({ name, phone, email, address, project, details, p
 
 export const template = {
   component: EstimateNotification,
-  subject: (data) => `New estimate request: ${data.project || 'Not provided'} - ${data.name || 'Customer'}`,
+  subject: (data) => `New estimate request: ${data['project'] || 'Not provided'} - ${data['name'] || 'Customer'}`,
   displayName: 'DeckCraft estimate notification',
   to: 'deckcraftdmv@gmail.com',
   previewData: {

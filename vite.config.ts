@@ -8,10 +8,14 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { loadEnv } from 'vite';
 import path from 'node:path';
 
-export default defineConfig(({ mode }) => {
-  Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
-  return {
+export default defineConfig({
   vite: {
+    plugins: [{
+      name: 'email-server-env',
+      config(_config, { mode }) {
+        Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
+      },
+    }],
     resolve: {
       alias: {
         'entities/lib/decode.js': path.resolve('node_modules/entities/lib/decode.js'),
@@ -27,5 +31,4 @@ export default defineConfig(({ mode }) => {
     pages: ["/", "/deck-building", "/deck-restoration-staining", "/deck-repair", "/deck-maintenance", "/richmond", "/henrico", "/chesterfield", "/hanover"].map((path) => ({ path })),
     prerender: { enabled: true, autoStaticPathsDiscovery: false },
   },
-  };
 });
