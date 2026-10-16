@@ -345,7 +345,7 @@ function Index() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/75 to-ink/90" />
         <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pb-32 pt-28 text-center">
-          <h1 className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-gold">
+          <h1 className="hero-eyebrow text-xs font-semibold uppercase tracking-[0.24em] text-gold">
             Deck Builder in Richmond, VA - Building &amp; Restoration
           </h1>
           <div className="mt-6 font-display text-4xl leading-[1.08] tracking-wide sm:text-6xl">
@@ -548,7 +548,7 @@ function Index() {
                 aria-expanded={open === i}
                 aria-controls={`faq-answer-${i}`}
                 id={`faq-question-${i}`}
-                className="flex h-auto w-full items-center justify-between gap-4 whitespace-normal rounded-none px-0 py-5 text-left text-base hover:bg-transparent"
+                className="flex h-auto w-full items-center justify-between gap-4 whitespace-normal rounded-none px-0 py-5 text-left text-base hover:bg-transparent hover:text-foreground"
               >
                 <span className="font-medium">{f.q}</span>
                 <Plus className={`h-5 w-5 shrink-0 text-gold transition-transform ${open === i ? "rotate-45" : ""}`} />
