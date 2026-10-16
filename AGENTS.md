@@ -16,3 +16,6 @@
 - Share the header and footer in the root around Outlet; reuse the estimate section on content pages to keep existing behavior and appearance consistent.
 - Local landing pages use explicit file routes backed by a browser-safe content collection and shared page view; derive FAQ and area schemas from that collection to avoid drift.
 - Prerender only the explicit nine public content paths with automatic discovery disabled; this finite allowlist avoids accidentally capturing future private pages.
+- Keep real reviews in one browser-safe data collection; render the invitation when empty and never derive rating schema.
+- Public estimates use a dedicated validated server function and service-role-only backup table; serialize per-email rate-limit checks and inserts in one database function to prevent concurrent bypass.
+- Save estimates before email delivery and report success only after managed sending confirms; sender-domain setup is required before wiring the fixed notification template with customer Reply-To.

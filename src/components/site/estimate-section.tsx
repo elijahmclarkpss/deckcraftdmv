@@ -2,9 +2,17 @@ import { useState } from "react";
 import { Check, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { business, formatOpeningHours } from "@/lib/business";
+import { useServerFn } from '@tanstack/react-start';
+import { submitEstimate } from '@/lib/estimates.functions';
+import { estimateSchema } from '@/lib/estimate-validation';
 const PHONE = "(804) 399-9722";
 const PHONE_HREF = "tel:+18043999722";
-export function EstimateSection() { const [sent, setSent] = useState(false); return (<section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
+export function EstimateSection() {
+  const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+  const submit = useServerFn(submitEstimate);
+  return (<section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold" aria-label={business.estimateArea}>Free Estimate</p>
@@ -32,9 +40,23 @@ export function EstimateSection() { const [sent, setSent] = useState(false); ret
 
           <form
             className="rounded-3xl border border-border bg-card soft-card p-6 sm:p-8"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              setSent(true);
+              if (pending) return;
+              const fields = new FormData(e.currentTarget);
+              const parsed = estimateSchema.safeParse({
+                name: fields.get('name'), phone: fields.get('phone'), email: fields.get('email'),
+                address: fields.get('address'), project: fields.get('project'), details: fields.get('details'),
+                website: fields.get('website'), pageUrl: window.location.href,
+              });
+              if (!parsed.success) { setError('Please check your name, phone, email and project details.'); return; }
+              setPending(true); setError('');
+              try {
+                const result = await submit({ data: parsed.data });
+                if (result.success) setSent(true);
+                else setError(result.message);
+              } catch { setError('We could not complete your request. Please call or text (804) 399-9722.'); }
+              finally { setPending(false); }
             }}
           >
             {sent ? (
@@ -47,6 +69,7 @@ export function EstimateSection() { const [sent, setSent] = useState(false); ret
               </div>
             ) : (
               <div className="grid gap-4">
+                <div hidden aria-hidden="true"><label htmlFor="estimate-website">Website</label><input id="estimate-website" name="website" tabIndex={-1} autoComplete="off" maxLength={200} /></div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Name" name="name" required />
                   <Field label="Phone" name="phone" type="tel" required />
@@ -85,10 +108,12 @@ export function EstimateSection() { const [sent, setSent] = useState(false); ret
                 </div>
                 <Button
                   type="submit"
+                  disabled={pending}
                   className="mt-2 h-auto rounded-full bg-gold px-6 py-4 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Request my estimate
+                  {pending ? 'Sending request…' : 'Request my estimate'}
                 </Button>
+                {error && <p role="alert" className="text-sm text-foreground">{error}</p>}
                 <p className="text-xs text-muted-foreground">No obligation. We never share your information.</p>
               </div>
             )}
