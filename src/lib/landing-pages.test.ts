@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, test } from 'vitest';
 import { getLandingPage, landingPageHead, landingPages } from './landing-pages';
 
 describe('local service scope', () => {

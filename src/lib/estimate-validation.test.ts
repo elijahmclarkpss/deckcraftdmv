@@ -1,4 +1,4 @@
-import { expect, test } from 'bun:test';
+import { expect, test } from 'vitest';
 import { estimateSchema } from './estimate-validation';
 import { reviews } from '@/data/reviews';
 const input = { name: 'Test Customer', phone: '(804) 555-0100', email: 'TEST@example.com', address: 'Richmond', project: 'New deck build', details: 'Deck estimate', website: '', pageUrl: 'https://deckcraftdmv.com/henrico' };

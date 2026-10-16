@@ -19,3 +19,4 @@
 - Keep real reviews in one browser-safe data collection; render the invitation when empty and never derive rating schema.
 - Public estimates use a dedicated validated server function and service-role-only backup table; serialize per-email rate-limit checks and inserts in one database function to prevent concurrent bypass.
 - Save estimates before email delivery and report success only after managed sending confirms; sender-domain setup is required before wiring the fixed notification template with customer Reply-To.
+- Use Vitest for project unit tests without ambient Bun types, which conflict with the generated Cloud fetch wrappers.
