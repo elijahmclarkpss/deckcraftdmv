@@ -48,7 +48,7 @@ export const shareImage = `${business.url}images/deckcraft-richmond-deck-og.jpg`
 
 export function formatOpeningHours(hours: typeof business.openingHoursSpecification) {
   const time = (value: string) => {
-    const [hour, minute] = value.split(":").map(Number);
+    const [hour = 0, minute = 0] = value.split(":").map(Number);
     return `${hour % 12 || 12}${minute ? `:${String(minute).padStart(2, "0")}` : ""}${hour < 12 ? "am" : "pm"}`;
   };
   return hours.map((entry) => {
