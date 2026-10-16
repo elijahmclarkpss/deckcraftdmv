@@ -13,7 +13,7 @@ export const submitEstimate = createServerFn({ method: 'POST' })
         p_project_details: data.details, p_page_url: data.pageUrl,
       });
       if (error || !saved) return { success: false, message: 'We could not save your request. Please call or text (804) 399-9722.' };
-      if (typeof saved === 'object' && !Array.isArray(saved) && saved.limited === true) {
+      if (typeof saved === 'object' && !Array.isArray(saved) && saved['limited'] === true) {
         return { success: false, message: 'Too many requests. Please wait 15 minutes or call or text (804) 399-9722.' };
       }
       // Sender domain setup is pending. Never report delivery until the managed
