@@ -19,7 +19,7 @@ const options = {
 
 test('estimate notification has fixed recipient and exact subject', async () => {
   await sendTemplateEmail('estimate-notification', 'ignored@example.com', options);
-  expect(send.mock.calls[0][0]).toMatchObject({
+  expect(send.mock.calls[0]?.[0]).toMatchObject({
     to: 'deckcraftdmv@gmail.com',
     subject: 'New estimate request: New deck build - Test Customer',
   });
@@ -27,7 +27,7 @@ test('estimate notification has fixed recipient and exact subject', async () => 
 
 test('customer reply-to and backup-specific key are sent with configured domain', async () => {
   await sendTemplateEmail('estimate-notification', 'deckcraftdmv@gmail.com', options);
-  expect(send.mock.calls[0][0]).toMatchObject({
+  expect(send.mock.calls[0]?.[0]).toMatchObject({
     reply_to: 'customer@example.com', idempotency_key: 'estimate-notification-test-backup-id',
     sender_domain: 'notify.deckcraftdmv.com',
     from: { name: 'DeckCraft', address: 'noreply@notify.deckcraftdmv.com' },
@@ -36,7 +36,8 @@ test('customer reply-to and backup-specific key are sent with configured domain'
 
 test('notification contains every requested submission field', async () => {
   await sendTemplateEmail('estimate-notification', 'deckcraftdmv@gmail.com', options);
-  const message = send.mock.calls[0][0];
+  const message = send.mock.calls[0]?.[0];
+  if (!message) throw new Error('Expected a managed email send');
   for (const value of Object.values(options.templateData)) expect(message.text).toContain(value);
 });
 
