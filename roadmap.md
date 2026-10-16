@@ -1,5 +1,5 @@
-# SEO and consistency cleanup
-- [x] Update business name, founding year, hours and homepage search/share metadata.
-- [x] Add business and FAQ structured data; retain collapsed FAQ answers in HTML.
-- [x] Add canonical, homepage sitemap and robots sitemap directive.
-- [x] Update H1 semantics without altering the design; verify business rules and rendered output.
+# Local SEO landing pages
+- [x] Add eight service and area pages with original copy, shared photos and estimate form.
+- [x] Add unique metadata, service/breadcrumb/FAQ schemas and server-rendered HTML.
+- [x] Share header/footer; add homepage and footer links plus a branded 404.
+- [x] Expand sitemap; verify all pages, links, FAQ HTML and estimate interaction.
