@@ -1,14 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { EstimateSection } from "@/components/site/estimate-section";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { business, businessSchema, formatOpeningHours, seoTitle, seoDescription, shareImage } from "@/lib/business";
+import { business, businessSchema, seoTitle, seoDescription, shareImage } from "@/lib/business";
 import {
   Check,
   Star,
   Phone,
-  Mail,
-  MapPin,
-  Clock,
   ArrowRight,
   Plus,
   Hammer,
@@ -91,6 +89,7 @@ const services = [
   {
     icon: Hammer,
     title: "New Deck Construction",
+    path: "/deck-building" as const,
     body: "Ground-level platforms, multi-level layouts, wrap-arounds and curved edges — permitted, properly footed, and framed for Virginia freeze-thaw.",
     img: newDeckWhiteRail,
     alt: "New deck with white railings and composite boards built behind a Richmond-area home",
@@ -104,6 +103,7 @@ const services = [
   {
     icon: Paintbrush,
     title: "Restoration & Staining",
+    path: "/deck-restoration-staining" as const,
     body: "Strip, sand, replace the boards that are gone, then seal with a solid-color stain that lands even across old and new wood.",
     slides: [
       {
@@ -127,6 +127,7 @@ const services = [
   {
     icon: Wrench,
     title: "Repairs, Stairs & Railings",
+    path: "/deck-repair" as const,
     body: "Soft boards, bouncing joists, wobbly rails, stair runs that never felt right. We fix the failure instead of selling you a teardown.",
     slides: [
       {
@@ -150,6 +151,7 @@ const services = [
   {
     icon: CalendarCheck,
     title: "Annual Maintenance",
+    path: "/deck-maintenance" as const,
     body: "One spring visit: wash off the pollen and mildew, spot-treat, then refresh the top coat before UV gets through it.",
     img: redStairs,
     alt: "Well-kept red-stained deck with stairs and lattice skirting in a shaded backyard",
@@ -167,6 +169,7 @@ const materials = ["TREX", "TIMBERTECH", "SIMPSON STRONG-TIE", "BEHR PREMIUM", "
 const areaGroups = [
   {
     county: "City of Richmond",
+    path: "/richmond" as const,
     blurb: "From the Fan to the Northside — decks on every kind of city lot.",
     places: [
       "The Fan",
@@ -181,16 +184,19 @@ const areaGroups = [
   },
   {
     county: "Henrico County",
+    path: "/henrico" as const,
     blurb: "West End to East End, Short Pump to Sandston.",
     places: ["Short Pump", "Glen Allen", "Innsbrook", "Lakeside", "Tuckahoe", "Varina"],
   },
   {
     county: "Chesterfield County",
+    path: "/chesterfield" as const,
     blurb: "Midlothian to Chester and everything between.",
     places: ["Midlothian", "Bon Air", "Brandermill", "Woodlake", "Chester", "Powhatan"],
   },
   {
     county: "Hanover County",
+    path: "/hanover" as const,
     blurb: "Mechanicsville and Ashland — full Hanover coverage.",
     places: ["Mechanicsville", "Ashland"],
   },
@@ -291,51 +297,10 @@ function AutoCarousel({ slides }: { slides: { label: string; img: string; alt: s
 }
 
 function Index() {
-  const [sent, setSent] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Nav */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-ink/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
-          <a href="#top" className="flex items-center gap-3">
-            <span className="border border-gold/60 px-3 py-1.5 font-display text-base tracking-[0.15em] text-gold">
-              DC
-            </span>
-            <span className="hidden font-display text-sm tracking-[0.22em] text-foreground sm:block">DeckCraft</span>
-          </a>
-          <nav className="hidden items-center gap-8 text-sm text-foreground/80 lg:flex">
-            <a href="#services" className="transition-colors hover:text-gold">
-              Services
-            </a>
-            <a href="#work" className="transition-colors hover:text-gold">
-              Our Work
-            </a>
-            <a href="#area" className="transition-colors hover:text-gold">
-              Service Area
-            </a>
-            <a href="#faq" className="transition-colors hover:text-gold">
-              FAQ
-            </a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <a
-              href={PHONE_HREF}
-              className="hidden items-center gap-2 text-sm text-foreground/85 hover:text-gold md:flex"
-            >
-              <Phone className="h-4 w-4 text-gold" /> {PHONE}
-            </a>
-            <a
-              href="#quote"
-              className="rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Free Estimate
-            </a>
-          </div>
-        </div>
-      </header>
-
       {/* Hero */}
       <section id="top" className="relative min-h-[92vh] overflow-hidden">
         <img
@@ -449,7 +414,7 @@ function Index() {
                 <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-gold" />
-                    <h3 className="font-display text-xl">{s.title}</h3>
+                    <h3 className="font-display text-xl"><Link to={s.path} className="hover:text-gold">{s.title}</Link></h3>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-foreground/70">{s.body}</p>
                   <ul className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -460,6 +425,7 @@ function Index() {
                       </li>
                     ))}
                   </ul>
+                  <Link to={s.path} className="mt-6 mr-6 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:underline">Explore this service <ArrowRight className="h-4 w-4" /></Link>
                   <a
                     href="#quote"
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:underline"
@@ -512,7 +478,7 @@ function Index() {
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {areaGroups.map((g) => (
               <div key={g.county}>
-                <h3 className="font-display text-lg text-gold">{g.county}</h3>
+                <h3 className="font-display text-lg text-gold"><Link to={g.path} className="hover:underline">{g.county}</Link></h3>
                 <p className="mt-2 text-sm text-muted-foreground">{g.blurb}</p>
                 <ul className="mt-4 space-y-1.5 text-sm text-foreground/80">
                   {g.places.map((p) => (
@@ -559,134 +525,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Quote */}
-      <section id="quote" className="gold-sheen bg-ink py-20 lg:py-28">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold" aria-label={business.estimateArea}>Free Estimate</p>
-            <h2 className="mt-4 font-display text-3xl tracking-wide sm:text-4xl">
-              Tell us what you've got. We'll come look at it.
-            </h2>
-            <p className="mt-5 text-foreground/70">
-              Most estimates are scheduled within 48 hours. No deposit to book the visit, no obligation after it.
-            </p>
-            <div className="mt-8 space-y-4 text-foreground/80">
-              <a href={PHONE_HREF} className="flex items-center gap-3 hover:text-gold">
-                <Phone className="h-5 w-5 text-gold" /> {PHONE}
-              </a>
-              <a href="mailto:deckcraftdmv@gmail.com" className="flex items-center gap-3 hover:text-gold">
-                <Mail className="h-5 w-5 text-gold" /> deckcraftdmv@gmail.com
-              </a>
-              <p className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-gold" /> Richmond, Virginia
-              </p>
-              <p className="flex items-center gap-3">
-                <Clock className="h-5 w-5 shrink-0 text-gold" /> {formatOpeningHours(business.openingHoursSpecification)}
-              </p>
-            </div>
-          </div>
+      <EstimateSection />
 
-          <form
-            className="rounded-3xl border border-border bg-card soft-card p-6 sm:p-8"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
-          >
-            {sent ? (
-              <div className="py-16 text-center">
-                <Check className="mx-auto h-10 w-10 text-gold" />
-                <h3 className="mt-4 font-display text-xl">Request received</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  We'll call you back within one business day to schedule the walkthrough.
-                </p>
-              </div>
-            ) : (
-              <div className="grid gap-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Name" name="name" required />
-                  <Field label="Phone" name="phone" type="tel" required />
-                </div>
-                <Field label="Email" name="email" type="email" required />
-                <Field label="Street address / neighborhood" name="address" />
-                <div className="grid gap-1.5">
-                  <label htmlFor="project" className="text-xs font-semibold uppercase tracking-wider">
-                    Project type
-                  </label>
-                  <select
-                    id="project"
-                    name="project"
-                    className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
-                  >
-                    <option>New deck build</option>
-                    <option>Deck restoration / staining</option>
-                    <option>Repairs &amp; board replacement</option>
-                    <option>Railings, stairs or privacy screens</option>
-                    <option>Annual maintenance plan</option>
-                    <option>Not sure — need an inspection</option>
-                  </select>
-                </div>
-                <div className="grid gap-1.5">
-                  <label htmlFor="details" className="text-xs font-semibold uppercase tracking-wider">
-                    Project details
-                  </label>
-                  <textarea
-                    id="details"
-                    name="details"
-                    rows={4}
-                    maxLength={1000}
-                    placeholder="Approx. size, age of the deck, what's bothering you about it…"
-                    className="rounded-xl border border-input bg-background p-3 text-sm outline-none focus:border-gold"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="mt-2 rounded-full bg-gold px-6 py-4 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90"
-                >
-                  Request my estimate
-                </button>
-                <p className="text-xs text-muted-foreground">No obligation. We never share your information.</p>
-              </div>
-            )}
-          </form>
-        </div>
-      </section>
-
-      <footer className="border-t border-border bg-ink py-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-sm text-muted-foreground sm:flex-row">
-          <span className="font-display tracking-[0.2em] text-gold">DeckCraft</span>
-          <span>Insured · Richmond, Virginia</span>
-          <span>© {new Date().getFullYear()} DeckCraft</span>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  required,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="grid gap-1.5">
-      <label htmlFor={name} className="text-xs font-semibold uppercase tracking-wider">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        maxLength={200}
-        className="h-11 rounded-xl border border-input bg-background px-3 text-sm outline-none focus:border-gold"
-      />
     </div>
   );
 }
